@@ -1,11 +1,12 @@
 import {Component} from 'react';
 import css from './App.module.css';
 import Form from './Form/Form';
+import ContactsList from './Contacts/ContactsList';
 
 export class App extends Component {
   state = {
     contacts: [],
-    filter: ''
+    filter: '',
   }
 
   formSubmitHandler = data => {
@@ -17,9 +18,8 @@ export class App extends Component {
       <h1>Phonebook</h1>
       <Form onSubmit={this.formSubmitHandler}/>
       <h2>Contacts</h2>
-      <ul>
-        <li></li>
-      </ul>
+      <ContactsList contacts={this.state.contacts}/>
+      
       
       
     </div>
