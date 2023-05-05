@@ -57,7 +57,7 @@ class Form extends Component {
              required
         />
        
-        <button type="submit">Add contact</button>
+        <button type="submit" className={css.addButton}>Add contact</button>
     </form>
         );
     }
