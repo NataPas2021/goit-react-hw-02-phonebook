@@ -1,5 +1,7 @@
 import {Component} from 'react';
 import {nanoid} from 'nanoid';
+import css from './Form.module.css';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
     state = {
@@ -31,8 +33,8 @@ class Form extends Component {
     render() {
     return (
      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.inputNameId}>Name</label>
-        <input
+        <label htmlFor={this.inputNameId} className={css.label}>Name</label>
+        <input className={css.input}
              type="text"
              name="name"
              value={this.state.name}
@@ -43,8 +45,8 @@ class Form extends Component {
              required
         />
         
-        <label htmlFor={this.inputNumberId}>Phone</label>
-        <input
+        <label htmlFor={this.inputNumberId} className={css.label}>Phone</label>
+        <input className={css.input}
              type="tel"
              name="number"
              value={this.state.number}
@@ -62,3 +64,8 @@ class Form extends Component {
 };
 
 export default Form;
+
+Form.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.string,
+}

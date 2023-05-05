@@ -4,6 +4,7 @@ import Form from './Form/Form';
 import ContactsList from './Contacts/ContactsList';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
+import PropTypes, { object } from 'prop-types';
 
 export class App extends Component {
   state = {
@@ -17,28 +18,27 @@ export class App extends Component {
   }
   
   addContact = ({name, number}) => {
+    const existName = this.state.contacts
+    .map(contact => contact.name)
+    .includes(name)
+    if(existName) {
+      alert(`${name} is elready in contacts!)`)
+      return
+    } else {
     const newContact= {
       id: nanoid(),
       name,
       number
     }
-    console.log(newContact)
 
     this.setState(({contacts}) => ({
       contacts: [newContact, ...contacts],
     }))
   }
-
-  changeFilter = e => {
-    if(this.state.filter === 0) {
-      this.setState({filter: this.state.contacts})
-      return
-    } else {
-    this.setState({filter: e.currentTarget.value});
-   console.log(e.currentTarget.value)
-    }
   }
 
+  changeFilter = e => { this.setState({filter: e.currentTarget.value});}
+  
   getVisibleContacts = () => {
     const {contacts, filter} = this.state;
     const normalizedFilter = filter.toLowerCase();
@@ -50,7 +50,8 @@ export class App extends Component {
 
   formSubmitHandler = data => {
     console.log(data)
-  }
+  };
+
   render() {
     const visibleContacts = this.getVisibleContacts();
 
@@ -60,9 +61,13 @@ export class App extends Component {
       <Form onSubmit={this.addContact}/>
       <h2>Contacts</h2>
       <Filter text='Search by name' value={this.state.filter} onChange={this.changeFilter}/>
-      <ContactsList contacts = {this.state.contacts} />
       <ContactsList contacts={visibleContacts}/>
     </div>
   );
   }
 };
+
+App.propTypes = {
+  filter: PropTypes.string,
+  contacts: PropTypes.arrayOf(object),
+}
