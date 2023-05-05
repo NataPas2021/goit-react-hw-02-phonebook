@@ -4,7 +4,7 @@ import Form from './Form/Form';
 import ContactsList from './Contacts/ContactsList';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
-import PropTypes, { object } from 'prop-types';
+
 
 export class App extends Component {
   state = {
@@ -19,8 +19,9 @@ export class App extends Component {
   
   addContact = ({name, number}) => {
     const existName = this.state.contacts
-    .map(contact => contact.name)
-    .includes(name)
+    .map(contact => contact.name.toUpperCase())
+    .includes(name.toUpperCase())
+
     if(existName) {
       alert(`${name} is elready in contacts!)`)
       return
@@ -74,7 +75,4 @@ export class App extends Component {
   }
 };
 
-App.propTypes = {
-  filter: PropTypes.string,
-  contacts: PropTypes.arrayOf(object),
-}
+

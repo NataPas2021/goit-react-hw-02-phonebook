@@ -66,6 +66,5 @@ class Form extends Component {
 export default Form;
 
 Form.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
 }
