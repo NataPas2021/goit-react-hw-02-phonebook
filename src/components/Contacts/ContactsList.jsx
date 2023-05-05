@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import css from './ContactsList.module.css'
 import PropTypes from 'prop-types';
 
@@ -7,7 +6,6 @@ const ContactsList = ({contacts, deleteContact}) => {
     <>
     <ul>
         {contacts.map(({id, name, number}) => {
-            id = nanoid();
          return (
             <div className={css.container}>
               <li className={css.contact}
